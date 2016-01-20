@@ -5,6 +5,20 @@ import time
 import serial
 import serial.tools.list_ports
 
+# at
+# OK
+# at cmgf=1
+# ERROR
+# AT+CMGF=1
+# OK
+# AT+CMGS="+8618514235966"
+# > IAMPIGZ
+# > DSF
+# +CMGS: 0
+
+# OK
+# 
+
 
 
 class SMS(object):
