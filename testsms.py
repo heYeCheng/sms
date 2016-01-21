@@ -20,21 +20,19 @@ class SMS(object):
 		print ser,'\n\n'
 		ser.write("AT+CMGF=1/r")
 
-		pdus4=""
+		data = ""
 		loop_time = 0
-		while(pdus4.find('OK/r/n')<0):
-			line = ser.readline()
-			print line
-			pdus4 = pdus4+  line
-			time.sleep(0.1)
+		while ser.inWaiting() > 0:
+			data += ser.read(1)
+			print data
 			print loop_time
-			if loop_time > 5:
+
+			if loop_time > 4:
 				break
 			else:
 				loop_time += 1
 
-		print ser,'\n\n'
-		print pdus4
+		ser.close()
 
 	def send(self, cont):
 		#start send message'已收到短信');
