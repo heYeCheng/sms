@@ -17,7 +17,7 @@ class SMS(object):
 		print 'start'
 		'启动端口'
 		ser = serial.Serial(port, bit, timeout = 2)
-		print ser
+		print ser,'\n\n'
 		ser.write("AT+CMGF=1/r")
 
 		pdus4=""
@@ -33,7 +33,7 @@ class SMS(object):
 			else:
 				loop_time += 1
 
-		print ser
+		print ser,'\n\n'
 		print pdus4
 
 	def send(self, cont):
