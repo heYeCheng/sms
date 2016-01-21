@@ -5,20 +5,6 @@ import time
 import serial
 import serial.tools.list_ports
 
-# at
-# OK
-# at cmgf=1
-# ERROR
-# AT+CMGF=1
-# OK
-# AT+CMGS="+8618514235966"
-# > IAMPIGZ
-# > DSF
-# +CMGS: 0
-
-# OK
-# 
-
 
 
 class SMS(object):
@@ -32,21 +18,22 @@ class SMS(object):
 		'启动端口'
 		ser = serial.Serial(port, bit)
 		print ser
-		# ser.write("AT+CMGF=1/r")
+		ser.write("AT+CMGF=1/r")
 
-		# pdus4=""
-		# loop_time = 0
-		# while(pdus4.find('OK/r/n')<0):
-		# 	mydata4=ser.read(65536)
-		# 	pdus4=pdus4+mydata4
-		# 	time.sleep(0.1)
-		# 	if loop_time > 5:
-		# 		break
-		# 	else:
-		# 		loop_time += 1
+		pdus4=""
+		loop_time = 0
+		while(pdus4.find('OK/r/n')<0):
+			mydata4=ser.read(65536)
+			pdus4=pdus4+mydata4
+			time.sleep(0.1)
+			print loop_time
+			if loop_time > 5:
+				break
+			else:
+				loop_time += 1
 
-		# print ser
-		# print pdus4
+		print ser
+		print pdus4
 
 	def send(self, cont):
 		#start send message'已收到短信');
