@@ -11,14 +11,13 @@ class SMS(object):
 	"""docstring for SMS"""
 	def __init__(self):
 		# self.arg = arg
-		print 'test'
 
 	def start(self, port, bit):
 		print 'start'
 		'启动端口'
 		ser = serial.Serial(port, bit, timeout = 2)
 		print ser,'\n\n'
-		ser.write("AT+CMGF=1/r")
+		print ser.write("AT")
 
 		data = ""
 		loop_time = 0
