@@ -16,13 +16,13 @@ class SMS(object):
 	def start(self, port, bit):
 		print 'start'
 		'启动端口'
-		ser = serial.Serial(port, bit)
+		ser = serial.Serial(port, bit, timeout = 2)
 		print ser
 		ser.write("AT+CMGF=1/r")
 
 		time.sleep(1)
-		mydata4=ser.read(65536)
-		print mydata4
+		line = ser.readline() 
+		print line
 
 		# pdus4=""
 		# loop_time = 0
