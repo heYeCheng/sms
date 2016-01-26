@@ -1,0 +1,171 @@
+Example: Read messages from a serial gsm modem.
+SMSLib: A Java API library for sending and receiving SMS via a GSM modem
+or other supported gateways.
+Web Site: http://smslib.org
+This software is distributed under the terms of the Apache v2.0 License.
+Version: 3.3.0-b2
+
+Modem Information:
+  Manufacturer:  WAVECOM MODEM
+  Model:  MULTIBAND  900E  1800
+  Serial No: 012345678901234
+  SIM IMSI: ** MASKED **
+  Signal Level: 87%
+  Battery Level: 0%
+
+0 [main] ERROR org.smslib  - GTW: modem.com4: Unhandled SMS in inbox, skipping... (mpRefNo must be > 0)
+0 [main] ERROR org.smslib  - GTW: modem.com4: ERROR PDU: 099158625420010001F344099158123991F30000611012110342238D05000300020104325090DC4EBBD373BA3C4C4FBFDD2063B90CBAA7D96C90B80C2297C9F531BD4C06BDDD20D9EC058BBD64B0980D249BE96A391708947DD7E5A069B2091A87E564D03DCD6683C465D0BC3E8797DDE43219943683E8E8B2BC0C4ACF4169F7BC6E36A7C7E9B29B0E9AD3DFF23219640FB3EB6590F92D07
+0 [main] ERROR org.smslib  - GTW: modem.com4: Unhandled SMS in inbox, skipping... (mpRefNo must be > 0)
+0 [main] ERROR org.smslib  - GTW: modem.com4: ERROR PDU: 099158625420010001F340099158123991F30000611012110342231205000300020240E432B93EA6A7DF6E17
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Wed Jan 20 22:06:18 CST 2016
+ Text: Shit
+ PDU data: 53749A0E
+ Originator: 8618514235966
+ Memory Index: 1
+ Multi-part Memory Index: 
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< UNKNOWN MESSAGE DUMP >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Memory Index: 2
+ Memory Location: SM
+===============================================================================
+
+===============================================================================
+<< UNKNOWN MESSAGE DUMP >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Memory Index: 3
+ Memory Location: SM
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: UCS2 (Unicode)
+ Date: Fri Jan 22 10:48:34 CST 2016
+ Text: hello canyou receive
+ PDU data: 00680065006C006C006F002000630061006E0079006F007500200072006500630065006900760065
+ Originator: 85252608836
+ Memory Index: 8
+ Multi-part Memory Index: 
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Thu Jan 21 11:47:25 CST 2016
+ Text: Your SIM card will be expired in 3  days on 24/01/2016 23:59.  Please refill your card to keep your current mobile no.  Simply recharge your SIM card with our refill vouchers to enjoy extra stored value.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 4,5
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Fri Jan 22 11:31:51 CST 2016
+ Text: $2 Administration Fee will be deducted on 23/01/2016 23:59.  Your SIM card will be suspended if there is insufficient stored value for deduction.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 6,7
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Sat Jan 23 11:30:32 CST 2016
+ Text: Your SIM card will be expired in 1  days on 24/01/2016 23:59.  Please refill your card to keep your current mobile no.  Simply recharge your SIM card with our refill vouchers to enjoy extra stored value.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 10,9
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Sat Jan 23 11:45:13 CST 2016
+ Text: $2 Administration Fee will be deducted on 23/01/2016 23:59.  Your SIM card will be suspended if there is insufficient stored value for deduction.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 11,12
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Sun Jan 24 11:29:54 CST 2016
+ Text: HKD 2.00 Administration Fee has been deducted.  The next deduction date is 22/02/2016 23:59.  For enquiries,  please call CMHK Customer Care Hotline 29458888. 
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 13,14
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Sun Jan 24 11:33:48 CST 2016
+ Text: Your SIM card will be expired today at 23:59.  Please refill your card to keep your current mobile no.  Simply recharge your SIM card with our refill vouchers to enjoy extra stored value.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 15,16
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+===============================================================================
+<< InboundMessage >>
+-------------------------------------------------------------------------------
+ Gateway Id: modem.com4
+ Encoding: 7-bit
+ Date: Mon Jan 25 11:28:15 CST 2016
+ Text: Your SIM card has been disabled due to expiry date reached.  Please refill your card before 23/02/2016 23:59 to keep your current mobile number and card balance.
+ PDU data: <cannot extract properly, udh present>
+ Originator: 852193193
+ Memory Index: -1
+ Multi-part Memory Index: 18,17
+ Memory Location: SM
+ Source / Destination Ports: -1 / -1
+===============================================================================
+
+Now Sleeping - Hit <enter> to terminate.
