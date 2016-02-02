@@ -98,7 +98,7 @@ public class SmsHandle
 			// affects all Gateway objects defined. This can also be more directed to a specific
 			// Gateway - look the JavaDocs for information on the Service method calls.
 			msgList = new ArrayList<InboundMessage>();
-			this.srv.SmsHandle(msgList, MessageClasses.ALL);
+			this.srv.readMessages(msgList, MessageClasses.ALL);
 
 			for (InboundMessage msg : msgList){
 //				System.out.println(msg);
@@ -152,6 +152,15 @@ public class SmsHandle
 		}
 	}
 
+	public class OutboundNotification implements IOutboundMessageNotification
+	{
+		public void process(String gatewayId, OutboundMessage msg)
+		{
+			System.out.println("Outbound handler called from Gateway: " + gatewayId);
+			System.out.println(msg);
+		}
+	}
+	
 	public class CallNotification implements ICallNotification
 	{
 		public void process(String gatewayId, String callerId)
