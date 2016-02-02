@@ -60,6 +60,18 @@ public class SmsHandle {
 		}
 	}
 
+	public void getImformation(){
+		System.out.println();
+		System.out.println("Modem Information:");
+		System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
+		System.out.println("  Model: " + this.gateway.getModel());
+		System.out.println("  Serial No: " + this.gateway.getSerialNo());
+		System.out.println("  SIM IMSI: " + this.gateway.getImsi());
+		System.out.println("  Signal Level: " + this.gateway.getSignalLevel() + "%");
+		System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
+		System.out.println();
+	}
+
 	public void sendMsg() throws Exception {
 		OutboundMessage msg = new OutboundMessage("18514235966", "hello canyou rece新的信息ve");
 		msg.setEncoding(MessageEncodings.ENCUCS2);
@@ -71,18 +83,7 @@ public class SmsHandle {
 		List<InboundMessage> msgList;
 		// Create the notification callback method for Inbound & Status Report
 		// messages.
-
 		try {
-
-			System.out.println();
-			System.out.println("Modem Information:");
-			System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
-			System.out.println("  Model: " + this.gateway.getModel());
-			System.out.println("  Serial No: " + this.gateway.getSerialNo());
-			System.out.println("  SIM IMSI: " + this.gateway.getImsi());
-			System.out.println("  Signal Level: " + this.gateway.getSignalLevel() + "%");
-			System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
-			System.out.println();
 			// Read Messages. The reading is done via the Service object and
 			// affects all Gateway objects defined. This can also be more
 			// directed to a specific
@@ -93,7 +94,6 @@ public class SmsHandle {
 
 			for (InboundMessage msg : msgList) {
 				// System.out.println(msg);
-
 				System.out.println();
 				System.out.println("ddddddddddddddddddddddddddddddddd");
 				System.out.println(msg.getDate());
@@ -103,17 +103,15 @@ public class SmsHandle {
 				System.out.println(msg.getMemIndex());
 
 				// if (msg.getOriginator().equalsIgnoreCase("852193193")){
-				// this.srv.deleteMessage(msg); //删除短信
+				this.srv.deleteMessage(msg); //删除短信
 				// System.out.println("this msg has been killed");
 				// }
-
 			}
 			// Sleep now. Emulate real world situation and give a chance to the
 			// notifications
 			// methods to be called in the event of message or voice call
 			// reception.
 			System.out.println("Now Sleeping - Hit <enter> to terminate.");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -155,8 +153,9 @@ public class SmsHandle {
 	public static void main(String args[]) {
 		SmsHandle app = new SmsHandle();
 		try {
-			app.sendMsg();
 			app.readMsg();
+			app.getImformation();
+			app.sendMsg();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
