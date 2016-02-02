@@ -1,21 +1,3 @@
-// ReadMessages.java - Sample application.
-//
-// This application shows you the basic procedure needed for reading
-// SMS messages from your GSM modem, in synchronous mode.
-//
-// Operation description:
-// The application setup the necessary objects and connects to the phone.
-// As a first step, it reads all messages found in the phone.
-// Then, it goes to sleep, allowing the asynchronous callback handlers to
-// be called. Furthermore, for callback demonstration purposes, it responds
-// to each received message with a "Got It!" reply.
-//
-// Tasks:
-// 1) Setup Service object.
-// 2) Setup one or more Gateway objects.
-// 3) Attach Gateway objects to Service object.
-// 4) Setup callback notifications.
-// 5) Run
 
 package sms;
 
@@ -33,17 +15,17 @@ import org.smslib.Message.MessageTypes;
 import org.smslib.Message.MessageEncodings;
 import org.smslib.modem.SerialModemGateway;
 
-public class SmsHandle
-{
+public class SmsHandle {
 	Service srv;
 	SerialModemGateway gateway;
 
-	public SmsHandle(){
-		try{
+	public SmsHandle() {
+		try {
 			System.out.println("Example: Read messages from a serial gsm modem.");
 			System.out.println(Library.getLibraryDescription());
 			System.out.println("Version: " + Library.getLibraryVersion());
-			// Create new Service object - the parent of all and the main interface
+			// Create new Service object - the parent of all and the main
+			// interface
 			// to you.
 			this.srv = new Service();
 			// Create the Gateway representing the serial GSM modem.
@@ -63,28 +45,35 @@ public class SmsHandle
 			this.gateway.setInboundNotification(inboundNotification);
 			this.gateway.setCallNotification(callNotification);
 
-			OutboundMessage msg;
 			OutboundNotification outboundNotification = new OutboundNotification();
 			this.gateway.setOutboundNotification(outboundNotification);
 			// Add the Gateway to the Service object.
 			this.srv.addGateway(this.gateway);
 			// Similarly, you may define as many Gateway objects, representing
-			// various GSM modems, add them in the Service object and control all of them.
+			// various GSM modems, add them in the Service object and control
+			// all of them.
 			//
 			// Start! (i.e. connect to all defined Gateways)
 			this.srv.startService();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	public void doIt() throws Exception
-	{
+	public void sendMsg() throws Exception {
+		OutboundMessage msg = new OutboundMessage("18514235966", "hello canyou rece新的信息ve");
+		msg.setEncoding(MessageEncodings.ENCUCS2);
+		srv.sendMessage(msg);
+		System.out.println(msg);
+	}
+
+	public void readMsg() throws Exception {
 		List<InboundMessage> msgList;
 		// Create the notification callback method for Inbound & Status Report
 		// messages.
-		
-		try
-		{
-			
+
+		try {
+
 			System.out.println();
 			System.out.println("Modem Information:");
 			System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
@@ -95,14 +84,16 @@ public class SmsHandle
 			System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
 			System.out.println();
 			// Read Messages. The reading is done via the Service object and
-			// affects all Gateway objects defined. This can also be more directed to a specific
-			// Gateway - look the JavaDocs for information on the Service method calls.
+			// affects all Gateway objects defined. This can also be more
+			// directed to a specific
+			// Gateway - look the JavaDocs for information on the Service method
+			// calls.
 			msgList = new ArrayList<InboundMessage>();
 			this.srv.readMessages(msgList, MessageClasses.ALL);
 
-			for (InboundMessage msg : msgList){
-//				System.out.println(msg);
-				
+			for (InboundMessage msg : msgList) {
+				// System.out.println(msg);
+
 				System.out.println();
 				System.out.println("ddddddddddddddddddddddddddddddddd");
 				System.out.println(msg.getDate());
@@ -110,74 +101,63 @@ public class SmsHandle
 				System.out.println(msg.getOriginator());
 				System.out.println(msg.getText());
 				System.out.println(msg.getMemIndex());
-			
-//				if (msg.getOriginator().equalsIgnoreCase("852193193")){
-//					this.srv.deleteMessage(msg);     //ɾ������  
-//					System.out.println("this msg has been killed");
-//				}
-				
+
+				// if (msg.getOriginator().equalsIgnoreCase("852193193")){
+				// this.srv.deleteMessage(msg); //删除短信
+				// System.out.println("this msg has been killed");
+				// }
+
 			}
-			// Sleep now. Emulate real world situation and give a chance to the notifications
-			// methods to be called in the event of message or voice call reception.
+			// Sleep now. Emulate real world situation and give a chance to the
+			// notifications
+			// methods to be called in the event of message or voice call
+			// reception.
 			System.out.println("Now Sleeping - Hit <enter> to terminate.");
-		
-		}
-		catch (Exception e)
-		{
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally
-		{
+		} finally {
 			this.srv.stopService();
 		}
 	}
 
-	public class InboundNotification implements IInboundMessageNotification
-	{
-		public void process(String gatewayId, MessageTypes msgType, InboundMessage msg)
-		{
-			if (msgType == MessageTypes.INBOUND) System.out.println(">>> New Inbound message detected from Gateway: " + gatewayId);
-			else if (msgType == MessageTypes.STATUSREPORT) System.out.println(">>> New Inbound Status Report message detected from Gateway: " + gatewayId);
+	public class InboundNotification implements IInboundMessageNotification {
+		public void process(String gatewayId, MessageTypes msgType, InboundMessage msg) {
+			if (msgType == MessageTypes.INBOUND)
+				System.out.println(">>> New Inbound message detected from Gateway: " + gatewayId);
+			else if (msgType == MessageTypes.STATUSREPORT)
+				System.out.println(">>> New Inbound Status Report message detected from Gateway: " + gatewayId);
 			System.out.println(msg);
-			try
-			{
-				// Uncomment following line if you wish to delete the message upon arrival.
+			try {
+				// Uncomment following line if you wish to delete the message
+				// upon arrival.
 				// srv.deleteMessage(msg);
-			}
-			catch (Exception e)
-			{
+			} catch (Exception e) {
 				System.out.println("Oops!!! Something gone bad...");
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public class OutboundNotification implements IOutboundMessageNotification
-	{
-		public void process(String gatewayId, OutboundMessage msg)
-		{
+	public class OutboundNotification implements IOutboundMessageNotification {
+		public void process(String gatewayId, OutboundMessage msg) {
 			System.out.println("Outbound handler called from Gateway: " + gatewayId);
 			System.out.println(msg);
 		}
 	}
-	
-	public class CallNotification implements ICallNotification
-	{
-		public void process(String gatewayId, String callerId)
-		{
+
+	public class CallNotification implements ICallNotification {
+		public void process(String gatewayId, String callerId) {
 			System.out.println(">>> New call detected from Gateway: " + gatewayId + " : " + callerId);
 		}
 	}
 
-	public static void main(String args[])
-	{
+	public static void main(String args[]) {
 		SmsHandle app = new SmsHandle();
-		try
-		{
-			app.doIt();
-		}
-		catch (Exception e)
-		{
+		try {
+			app.sendMsg();
+			app.readMsg();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
