@@ -11,27 +11,31 @@ class SMS(object):
 	"""docstring for SMS"""
 	def __init__(self):
 		# self.arg = arg
+		pass
 
 	def start(self, port, bit):
 		print 'start'
 		'启动端口'
 		ser = serial.Serial(port, bit, timeout = 2)
 		print ser,'\n\n'
-		print ser.write("AT")
+		if ser.isOpen():
+			ser.write("AT")
 
-		data = ""
-		loop_time = 0
-		while ser.inWaiting() > 0:
-			data += ser.read(1)
-			print data
-			print loop_time
+			data = ""
+			loop_time = 0
+			while ser.inWaiting() > 0:
+				data += ser.read(1)
+				print data
+				print loop_time
 
-			if loop_time > 4:
-				break
-			else:
-				loop_time += 1
+				if loop_time > 4:
+					break
+				else:
+					loop_time += 1
 
-		ser.close()
+			ser.close()
+		else:
+			print 'fail'
 
 	def send(self, cont):
 		#start send message'已收到短信');
