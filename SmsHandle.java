@@ -15,6 +15,9 @@ import org.smslib.Message.MessageTypes;
 import org.smslib.Message.MessageEncodings;
 import org.smslib.modem.SerialModemGateway;
 
+import redis.RedisUtil;
+import redis.clients.jedis.Jedis;
+
 public class SmsHandle {
 	Service srv;
 	SerialModemGateway gateway;
@@ -63,26 +66,39 @@ public class SmsHandle {
 	public void getImformation(){
 		System.out.println();
 		System.out.println("Modem Information:");
-		System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
-		System.out.println("  Model: " + this.gateway.getModel());
-		System.out.println("  Serial No: " + this.gateway.getSerialNo());
-		System.out.println("  SIM IMSI: " + this.gateway.getImsi());
-		System.out.println("  Signal Level: " + this.gateway.getSignalLevel() + "%");
-		System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
+//		System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
+//		System.out.println("  Model: " + this.gateway.getModel());
+//		System.out.println("  Serial No: " + this.gateway.getSerialNo());
+//		System.out.println("  SIM IMSI: " + this.gateway.getImsi());
+//		System.out.println("  Signal Level: " + this.gateway.getSignalLevel() + "%");
+//		System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
 		System.out.println();
 	}
 
 	public void sendMsg() throws Exception {
-		OutboundMessage msg = new OutboundMessage("18514235966", "hello canyou receÊñ∞ÁöÑ‰ø°ÊÅØve");
-		msg.setEncoding(MessageEncodings.ENCUCS2);
-		srv.sendMessage(msg);
-		System.out.println(msg);
+//		this.srv.startService();
+		Jedis redis = RedisUtil.getJedis();
+		while(true){
+			List<String> bb = redis.blpop(0, "list");
+			OutboundMessage msg;
+			if(bb.get(1).equals("1")){
+				msg = new OutboundMessage("18514235966", "hello canyousdfdfø™¿ receadve");
+			}else{
+				msg = new OutboundMessage("18514235966", "322323 sdfdfø™¿ receadve");
+			}
+
+			msg.setEncoding(MessageEncodings.ENCUCS2);
+			this.srv.sendMessage(msg);
+			System.out.println(msg);
+		}
+			
 	}
 
 	public void readMsg() throws Exception {
+		System.out.println("dsf");
 		List<InboundMessage> msgList;
-		// Create the notification callback method for Inbound & Status Report
-		// messages.
+//		// Create the notification callback method for Inbound & Status Report
+//		// messages.
 		try {
 			// Read Messages. The reading is done via the Service object and
 			// affects all Gateway objects defined. This can also be more
@@ -103,7 +119,7 @@ public class SmsHandle {
 				System.out.println(msg.getMemIndex());
 
 				// if (msg.getOriginator().equalsIgnoreCase("852193193")){
-				this.srv.deleteMessage(msg); //Âà†Èô§Áü≠‰ø°
+//				this.srv.deleteMessage(msg); //Âà†Èô§Áü≠‰ø°
 				// System.out.println("this msg has been killed");
 				// }
 			}
@@ -115,6 +131,7 @@ public class SmsHandle {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			System.out.println("finish recv");
 			this.srv.stopService();
 		}
 	}
@@ -153,8 +170,8 @@ public class SmsHandle {
 	public static void main(String args[]) {
 		SmsHandle app = new SmsHandle();
 		try {
-			app.readMsg();
-			app.getImformation();
+//			app.readMsg();
+//			app.getImformation();
 			app.sendMsg();
 		} catch (Exception e) {
 			e.printStackTrace();
