@@ -1,5 +1,4 @@
-
-package sms;
+package com.msg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,27 +62,30 @@ public class SmsHandle {
 		}
 	}
 
-	public void getImformation(){
+	public void getImformation() {
 		System.out.println();
 		System.out.println("Modem Information:");
-//		System.out.println("  Manufacturer: " + this.gateway.getManufacturer());
-//		System.out.println("  Model: " + this.gateway.getModel());
-//		System.out.println("  Serial No: " + this.gateway.getSerialNo());
-//		System.out.println("  SIM IMSI: " + this.gateway.getImsi());
-//		System.out.println("  Signal Level: " + this.gateway.getSignalLevel() + "%");
-//		System.out.println("  Battery Level: " + this.gateway.getBatteryLevel() + "%");
+		// System.out.println(" Manufacturer: " +
+		// this.gateway.getManufacturer());
+		// System.out.println(" Model: " + this.gateway.getModel());
+		// System.out.println(" Serial No: " + this.gateway.getSerialNo());
+		// System.out.println(" SIM IMSI: " + this.gateway.getImsi());
+		// System.out.println(" Signal Level: " + this.gateway.getSignalLevel()
+		// + "%");
+		// System.out.println(" Battery Level: " +
+		// this.gateway.getBatteryLevel() + "%");
 		System.out.println();
 	}
 
 	public void sendMsg() throws Exception {
-//		this.srv.startService();
+		// this.srv.startService();
 		Jedis redis = RedisUtil.getJedis();
-		while(true){
+		while (true) {
 			List<String> bb = redis.blpop(0, "list");
 			OutboundMessage msg;
-			if(bb.get(1).equals("1")){
+			if (bb.get(1).equals("1")) {
 				msg = new OutboundMessage("18514235966", "hello canyousdfdf¿ªÀÊreceadve");
-			}else{
+			} else {
 				msg = new OutboundMessage("18514235966", "322323 sdfdf¿ªÀÊreceadve");
 			}
 
@@ -91,14 +93,15 @@ public class SmsHandle {
 			this.srv.sendMessage(msg);
 			System.out.println(msg);
 		}
-			
+
 	}
 
 	public void readMsg() throws Exception {
 		System.out.println("dsf");
 		List<InboundMessage> msgList;
-//		// Create the notification callback method for Inbound & Status Report
-//		// messages.
+		// // Create the notification callback method for Inbound & Status
+		// Report
+		// // messages.
 		try {
 			// Read Messages. The reading is done via the Service object and
 			// affects all Gateway objects defined. This can also be more
@@ -119,7 +122,7 @@ public class SmsHandle {
 				System.out.println(msg.getMemIndex());
 
 				// if (msg.getOriginator().equalsIgnoreCase("852193193")){
-//				this.srv.deleteMessage(msg); //åˆ é™¤çŸ­ä¿¡
+				// this.srv.deleteMessage(msg); //åˆ é™¤çŸ­ä¿¡
 				// System.out.println("this msg has been killed");
 				// }
 			}
@@ -170,8 +173,8 @@ public class SmsHandle {
 	public static void main(String args[]) {
 		SmsHandle app = new SmsHandle();
 		try {
-//			app.readMsg();
-//			app.getImformation();
+			// app.readMsg();
+			// app.getImformation();
 			app.sendMsg();
 		} catch (Exception e) {
 			e.printStackTrace();
